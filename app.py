@@ -88,7 +88,7 @@ with st.sidebar:
         st.warning("Provide a key above or add it to secrets to execute generation.")
             
     st.markdown("---")
-    st.caption("Powered by Open Source Python & Groq Llama-3 Pipelines.")
+    st.caption("Powered by Open Source Python & Groq Inference Engine.")
 
 # Right Content Canvas Panel
 col_main, col_export = st.columns([3, 1])
@@ -100,7 +100,7 @@ with col_main:
     selected_chapter = st.selectbox("Choose Target DPR Chapter to Draft:", options=list(DPR_CHAPTERS_MAP.keys()))
     st.markdown(f"**Focus Objective:** {DPR_CHAPTERS_MAP[selected_chapter]}")
 
-    # Core AI Logic Generator Function using Groq Backend
+    # Core AI Logic Generator Function using Active Groq Production Backend
     if st.button(f"Generate Content for {selected_chapter}"):
         if not st.session_state["groq_key"]:
             st.error("Error: Missing Groq API access token credentials.")
@@ -126,9 +126,9 @@ with col_main:
                     Ensure the writing is highly technical, authoritative, formal, and rich in structural depth. Avoid generic summaries or vague placeholders. If financial or technical metrics are described, generate plausible realistic inline data matrices matching institutional expectations (NDDB style).
                     """
 
-                    # Groq Chat Completion Endpoint
+                    # Groq Chat Completion Endpoint using stable flagship open-source production engine
                     response = client.chat.completions.create(
-                        model="llama-3.3-70b-specdec",  # Ultra-fast, highly accurate model
+                        model="openai/gpt-oss-120b",  # Fully active, ultra-fast production model
                         messages=[
                             {"role": "system", "content": "You are a professional compiler of official institutional detailed project reports for agricultural infrastructure projects."},
                             {"role": "user", "content": prompt_message}
